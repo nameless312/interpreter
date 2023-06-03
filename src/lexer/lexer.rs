@@ -2,7 +2,7 @@ use anyhow::Result;
 
 #[allow(dead_code)]
 #[derive(Debug,PartialEq, Eq)]
-enum Token {
+pub enum Token {
     Illegal,
     Eof,
     Ident(String),
@@ -36,7 +36,7 @@ enum Token {
     Plus,
 }
 
-struct Lexer {
+pub struct Lexer {
     position: usize,
     read_position: usize,
     ch: u8,
@@ -44,7 +44,7 @@ struct Lexer {
 }
 
 impl Lexer {
-    fn new(input: String) -> Lexer {
+    pub fn new(input: String) -> Lexer {
         let mut lex = Lexer {
             position: 0,
             read_position: 0,
@@ -65,7 +65,7 @@ impl Lexer {
         self.read_position += 1;
     }
 
-    fn next_token(&mut self) -> Result<Token> {
+    pub fn next_token(&mut self) -> Result<Token> {
         self.skip_whitespace();
         let token = match self.ch {
             b'{' => Token::Lsquirly,
